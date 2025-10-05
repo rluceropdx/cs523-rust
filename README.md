@@ -11,9 +11,8 @@ cargo run --release
 
 ## Acknowledgments
 
-The `prompted` crate was used.
-
-Chat GPT helped with converting Vector to [bool; 8].
+Chat GPT helped with converting Vector to [bool; 8]
+as well as unwrapping Option<String>
 
 I used Bart Massey's LICENSE.txt as example for mine.
 

@@ -1,21 +1,22 @@
-use prompted::input;
-
 fn main() {
-    let input_first_row = input!("Provide the first row: ");
+    let input_first_row = std::env::args().nth(1);
+    let input_total_rows = std::env::args().nth(2);
+    let total_rows: u8 = input_total_rows.unwrap().parse().unwrap_or(10);
 
-    let mut bits_str: String = "*.*..*..".to_string(); // or "10100100".to_string();
+    let mut bits_str: String = String::from("*.*..*.."); // Default first row
 
-    if input_first_row.len() == 8 {
-        bits_str = input_first_row;
+    if input_first_row.is_some() && input_first_row.unwrap().len() == 8 {
+        bits_str = std::env::args().nth(1).unwrap();
     } else {
         println!("First row input not valid, will use {} instead", bits_str);
-        println!();
     }
 
+    println!("Will calculate {} generations/rows", total_rows);
+    println!();
     println!("{}", bits_str); // first row
 
     let mut tf_list: [bool; 8] = bits_to_tf(&bits_str);
-    for _i in 1..10 {
+    for _i in 1..total_rows {
         tf_list = calc_next_generation(tf_list);
         println!();
     }
