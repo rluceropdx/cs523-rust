@@ -12,7 +12,8 @@ cargo run --release
 ## Acknowledgments
 
 Chat GPT helped with converting Vector to [bool; 8]
-as well as unwrapping Option<String>
+as well as unwrapping Option<String>. Also helped to
+demonstrate examples of Rust tests.
 
 I used Bart Massey's LICENSE.txt as example for mine.
 

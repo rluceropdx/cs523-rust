@@ -68,3 +68,40 @@ fn rule110(bits: [bool; 3]) -> bool {
     };
     result
 }
+
+// tests below
+#[cfg(test)]
+mod tests {
+    use super::*; // import outer scope functions
+
+    #[test]
+    fn test_rule110_tft() {
+        assert_eq!(rule110([true, false, true]), true);
+        assert_eq!(rule110([true, false, false]), false);
+        assert_eq!(rule110([false, false, false]), false);
+    }
+
+    #[test]
+    fn test_bits_to_tf() {
+        assert_eq!(
+            bits_to_tf("10101010"),
+            [true, false, true, false, true, false, true, false]
+        );
+        assert_eq!(
+            bits_to_tf("*.*.*.*."),
+            [true, false, true, false, true, false, true, false]
+        );
+    }
+
+    #[test]
+    fn test_calc_next_generation() {
+        assert_eq!(
+            calc_next_generation([true, false, true, false, false, true, false, false]),
+            [true, true, true, false, true, true, false, true]
+        );
+        assert_eq!(
+            calc_next_generation([true, true, true, false, true, true, false, true]),
+            [false, false, true, true, true, true, true, true]
+        );
+    }
+}
