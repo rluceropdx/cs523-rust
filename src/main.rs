@@ -53,7 +53,9 @@ fn bits_to_tf(bits_str: &str) -> [bool; 8] {
         }
     }
 
-    let result: [bool; 8] = tf_bits.clone().try_into().expect("Vector has wrong length");
+    let result: [bool; 8] = tf_bits.clone().try_into().expect(
+        "String cannot be converted to bits of true/false. Please check contents or length.",
+    );
     result
 }
 
@@ -80,6 +82,7 @@ fn rule110(bits: [bool; 3]) -> bool {
 #[cfg(test)]
 mod tests {
     use super::*; // import outer scope functions
+    use std::panic;
 
     #[test]
     fn test_rule110_tft() {
@@ -90,6 +93,22 @@ mod tests {
 
     #[test]
     fn test_bits_to_tf() {
+        let test_result1 = panic::catch_unwind(|| {
+            bits_to_tf("12345678");
+        });
+        assert!(
+            test_result1.is_err(),
+            "String cannot be converted to bits of true/false. Please check contents or length."
+        );
+
+        let test_result2 = panic::catch_unwind(|| {
+            bits_to_tf("*.*.*.");
+        });
+        assert!(
+            test_result2.is_err(),
+            "String cannot be converted to bits of true/false. Please check contents or length."
+        );
+
         assert_eq!(
             bits_to_tf("10101010"),
             [true, false, true, false, true, false, true, false]
