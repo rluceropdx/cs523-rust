@@ -31,14 +31,14 @@ fn main() {
 
 fn calc_next_generation(tf_list: [bool; 8]) -> [bool; 8] {
     let result: [bool; 8] = [
-        rule110([tf_list[7], tf_list[0], tf_list[1]]),
-        rule110([tf_list[0], tf_list[1], tf_list[2]]),
-        rule110([tf_list[1], tf_list[2], tf_list[3]]),
-        rule110([tf_list[2], tf_list[3], tf_list[4]]),
-        rule110([tf_list[3], tf_list[4], tf_list[5]]),
-        rule110([tf_list[4], tf_list[5], tf_list[6]]),
-        rule110([tf_list[5], tf_list[6], tf_list[7]]),
-        rule110([tf_list[6], tf_list[7], tf_list[0]]),
+        rule110(&[tf_list[7], tf_list[0], tf_list[1]]),
+        rule110(&[tf_list[0], tf_list[1], tf_list[2]]),
+        rule110(&[tf_list[1], tf_list[2], tf_list[3]]),
+        rule110(&[tf_list[2], tf_list[3], tf_list[4]]),
+        rule110(&[tf_list[3], tf_list[4], tf_list[5]]),
+        rule110(&[tf_list[4], tf_list[5], tf_list[6]]),
+        rule110(&[tf_list[5], tf_list[6], tf_list[7]]),
+        rule110(&[tf_list[6], tf_list[7], tf_list[0]]),
     ];
     result
 }
@@ -59,7 +59,7 @@ fn bits_to_tf(bits_str: &str) -> [bool; 8] {
     result
 }
 
-fn rule110(bits: [bool; 3]) -> bool {
+fn rule110(bits: &[bool; 3]) -> bool {
     let result = match bits {
         [true, true, true] => false,
         [true, true, false] => true,
@@ -86,9 +86,9 @@ mod tests {
 
     #[test]
     fn test_rule110_tft() {
-        assert_eq!(rule110([true, false, true]), true);
-        assert_eq!(rule110([true, false, false]), false);
-        assert_eq!(rule110([false, false, false]), false);
+        assert_eq!(rule110(&[true, false, true]), true);
+        assert_eq!(rule110(&[true, false, false]), false);
+        assert_eq!(rule110(&[false, false, false]), false);
     }
 
     #[test]
