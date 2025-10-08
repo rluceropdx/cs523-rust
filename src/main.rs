@@ -1,3 +1,4 @@
+/// PSU CS 523 - Rule 110 HW
 fn main() {
     let mut input_first_row = std::env::args().nth(1).unwrap_or("*.*..*..".to_string()); // Default first row
     let input_total_rows: String = std::env::args().nth(2).unwrap_or("10".to_string()); // total generations to build
@@ -29,6 +30,11 @@ fn main() {
     }
 }
 
+/// Method accepts a bool array (of size 8)
+/// and slices it into the needed left, center,
+/// and right elements to find the next generation.
+/// Returns a bool array (of size 8) of the
+/// entire next row/generation.
 fn calc_next_generation(tf_list: [bool; 8]) -> [bool; 8] {
     let result: [bool; 8] = [
         rule110(&[tf_list[7], tf_list[0], tf_list[1]]),
@@ -43,6 +49,10 @@ fn calc_next_generation(tf_list: [bool; 8]) -> [bool; 8] {
     result
 }
 
+/// Method accepts a borrowed String and converts
+/// it into a bool array (of size 8). It expects
+/// inputs of either * or 1 for true and . or 0
+/// for false.
 fn bits_to_tf(bits_str: &str) -> [bool; 8] {
     let mut tf_bits: Vec<bool> = Vec::new();
     for bit_char in bits_str.chars() {
@@ -59,6 +69,10 @@ fn bits_to_tf(bits_str: &str) -> [bool; 8] {
     result
 }
 
+/// Method accepts a bool array (of size 3)
+/// for the needed left, center, and right
+/// elements and returns a bool. It also
+/// prints the result for that position.
 fn rule110(bits: &[bool; 3]) -> bool {
     let result = match bits {
         [true, true, true] => false,
@@ -85,6 +99,7 @@ mod tests {
     use std::panic;
 
     #[test]
+    // Test left, center, right [bool; 3] calculates accurately
     fn test_rule110_tft() {
         assert_eq!(rule110(&[true, false, true]), true);
         assert_eq!(rule110(&[true, false, false]), false);
@@ -92,6 +107,7 @@ mod tests {
     }
 
     #[test]
+    // Test that a passed String converts accurately into a bool array (of size 8)
     fn test_bits_to_tf() {
         let test_result1 = panic::catch_unwind(|| {
             bits_to_tf("12345678");
@@ -120,6 +136,7 @@ mod tests {
     }
 
     #[test]
+    // Test that a row calculates accurately into the next row/generation
     fn test_calc_next_generation() {
         assert_eq!(
             calc_next_generation([true, false, true, false, false, true, false, false]),
