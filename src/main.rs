@@ -25,7 +25,7 @@ fn main() {
 
     let mut tf_list: [bool; 8] = bits_to_tf(&input_first_row);
     for _i in 1..total_rows {
-        tf_list = calc_next_generation(tf_list);
+        tf_list = calc_next_generation(&tf_list);
         println!();
     }
 }
@@ -35,7 +35,7 @@ fn main() {
 /// and right elements to find the next generation.
 /// Returns a bool array (of size 8) of the
 /// entire next row/generation.
-fn calc_next_generation(tf_list: [bool; 8]) -> [bool; 8] {
+fn calc_next_generation(tf_list: &[bool; 8]) -> [bool; 8] {
     let result: [bool; 8] = [
         rule110(&[tf_list[7], tf_list[0], tf_list[1]]),
         rule110(&[tf_list[0], tf_list[1], tf_list[2]]),
@@ -139,11 +139,11 @@ mod tests {
     // Test that a row calculates accurately into the next row/generation
     fn test_calc_next_generation() {
         assert_eq!(
-            calc_next_generation([true, false, true, false, false, true, false, false]),
+            calc_next_generation(&[true, false, true, false, false, true, false, false]),
             [true, true, true, false, true, true, false, true]
         );
         assert_eq!(
-            calc_next_generation([true, true, true, false, true, true, false, true]),
+            calc_next_generation(&[true, true, true, false, true, true, false, true]),
             [false, false, true, true, true, true, true, true]
         );
     }
