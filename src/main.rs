@@ -101,9 +101,13 @@ mod tests {
     #[test]
     // Test left, center, right [bool; 3] calculates accurately
     fn test_rule110_tft() {
-        assert_eq!(rule110(&[true, false, true]), true);
-        assert_eq!(rule110(&[true, false, false]), false);
-        assert_eq!(rule110(&[false, false, false]), false);
+        let input1: [bool; 3] = [true, false, true];
+        let input2: [bool; 3] = [true, false, false];
+        let input3: [bool; 3] = [false, false, false];
+
+        assert_eq!(rule110(&input1), true);
+        assert_eq!(rule110(&input2), false);
+        assert_eq!(rule110(&input3), false);
     }
 
     #[test]
@@ -138,12 +142,14 @@ mod tests {
     #[test]
     // Test that a row calculates accurately into the next row/generation
     fn test_calc_next_generation() {
+        let input1: [bool; 8] = [true, false, true, false, false, true, false, false];
+        let input2: [bool; 8] = [true, true, true, false, true, true, false, true];
         assert_eq!(
-            calc_next_generation(&[true, false, true, false, false, true, false, false]),
+            calc_next_generation(&input1),
             [true, true, true, false, true, true, false, true]
         );
         assert_eq!(
-            calc_next_generation(&[true, true, true, false, true, true, false, true]),
+            calc_next_generation(&input2),
             [false, false, true, true, true, true, true, true]
         );
     }
