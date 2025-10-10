@@ -3,7 +3,7 @@ fn main() {
     let mut input_first_row = std::env::args().nth(1).unwrap_or("*.*..*..".to_string()); // Default first row
     let input_total_rows: String = std::env::args().nth(2).unwrap_or("10".to_string()); // total generations to build
 
-    let total_rows: u8 = match input_total_rows.parse() {
+    let total_rows: u128 = match input_total_rows.parse() {
         Ok(number) => number,
         Err(error) => {
             println!("oops, not a number: {}", error);
