@@ -9,6 +9,22 @@ It is written in Rust. Run it with
 cargo run --release
 ```
 
+To generate 25 rows instead of 10 by default use:
+```rust
+cargo run --release 25
+```
+
+To customize the initial row include a different string in quotes like so:
+```rust
+cargo run --release "**..**.."
+```
+
+Another example:
+```rust
+cargo run --release "*.*.**.." 100
+```
+
+
 ## Acknowledgments
 
 Chat GPT helped with converting Vector to [bool; 8]
